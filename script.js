@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Dados das trilhas de carreira
     const careerData = {
-        'Desenvolvimento de Software': {
+        'Construção de Software': {
             levels: [
                 {
                     level: 'Júnior',
