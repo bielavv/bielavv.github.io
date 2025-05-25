@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Demonstrar habilidades de mentoria (para níveis sênior+)'
             ]
         },
-        'Análise de Dados': {
+        'Processamento de Dados': {
             levels: [
                 {
                     level: 'Júnior',
@@ -401,8 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         
         <div class="modal-footer">
-            <p>Para mais detalhes sobre sua progressão, agende uma conversa com seu gestor ou RH.</p>
-            <button class="modal-close-button">Fechar</button>
+           
         </div>
         `;
         
@@ -430,38 +429,38 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Botões de mentoria
-    const mentorButtons = document.querySelectorAll('.mentor-button');
-    mentorButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const mentorName = this.closest('.mentor-card').querySelector('h3').textContent;
-            const mentorRole = this.closest('.mentor-card').querySelector('.mentor-role').textContent;
-            
-            // Criar formulário dinâmico
-            const formHtml = `
+ const mentorButtons = document.querySelectorAll('.mentor-button');
+mentorButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const mentorName = this.closest('.mentor-card').querySelector('h3').textContent;
+        const mentorRole = this.closest('.mentor-card').querySelector('.mentor-role').textContent;
+
+        const formHtml = `
+            <div class="mentoria-form-container">
                 <h3>Solicitar Mentoria com ${mentorName}</h3>
-                <p>${mentorRole}</p>
-                
+                <p class="mentor-role-highlight">${mentorRole}</p>
+
                 <form id="mentorship-form">
                     <div class="form-group">
                         <label for="mentee-name">Seu Nome</label>
                         <input type="text" id="mentee-name" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="mentee-role">Seu Cargo</label>
                         <input type="text" id="mentee-role" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="mentee-email">Seu Email</label>
                         <input type="email" id="mentee-email" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="mentee-goals">Seus Objetivos com a Mentoria</label>
                         <textarea id="mentee-goals" rows="4" required></textarea>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="mentee-availability">Sua Disponibilidade</label>
                         <select id="mentee-availability" required>
@@ -471,83 +470,83 @@ document.addEventListener('DOMContentLoaded', function() {
                             <option value="flexivel">Horário Flexível</option>
                         </select>
                     </div>
-                    
+
                     <button type="submit" class="submit-button">Enviar Solicitação</button>
                 </form>
-            `;
-            
-            // Configurar modal
-            careerModalTitle.textContent = 'Solicitar Mentoria';
-            careerModalBody.innerHTML = formHtml;
-            careerModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            
-            // Configurar submit do formulário
-            document.getElementById('mentorship-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert(`Solicitação de mentoria enviada com sucesso! ${mentorName} entrará em contato em breve.`);
-                careerModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
+            </div>
+        `;
+
+        careerModalTitle.textContent = 'Solicitar Mentoria';
+        careerModalBody.innerHTML = formHtml;
+        careerModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+
+        document.getElementById('mentorship-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(`Solicitação de mentoria enviada com sucesso! ${mentorName} entrará em contato em breve.`);
+            careerModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         });
     });
+});
+
     
     // Botões de rotação
     const rotationButtons = document.querySelectorAll('.rotation-button');
-    rotationButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const rotationTitle = this.closest('.rotation-card').querySelector('h3').textContent;
-            
-            // Criar formulário dinâmico
-            const formHtml = `
+rotationButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const rotationTitle = this.closest('.rotation-card').querySelector('h3').textContent;
+
+        const formHtml = `
+            <div class="rotation-form-container">
                 <h3>Expressar Interesse na Rotação</h3>
-                <p>${rotationTitle}</p>
-                
+                <p class="rotation-role-highlight">${rotationTitle}</p>
+
                 <form id="rotation-form">
                     <div class="form-group">
                         <label for="employee-name">Seu Nome</label>
                         <input type="text" id="employee-name" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="employee-current-role">Seu Cargo Atual</label>
                         <input type="text" id="employee-current-role" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="employee-email">Seu Email</label>
                         <input type="email" id="employee-email" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="employee-motivation">Por que você está interessado nesta rotação?</label>
                         <textarea id="employee-motivation" rows="4" required></textarea>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="employee-skills">Quais habilidades você traz que são relevantes?</label>
                         <textarea id="employee-skills" rows="4" required></textarea>
                     </div>
-                    
+
                     <button type="submit" class="submit-button">Enviar Interesse</button>
                 </form>
-            `;
-            
-            // Configurar modal
-            careerModalTitle.textContent = 'Rotação de Funções';
-            careerModalBody.innerHTML = formHtml;
-            careerModal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            
-            // Configurar submit do formulário
-            document.getElementById('rotation-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert(`Seu interesse na rotação ${rotationTitle} foi registrado com sucesso! O RH entrará em contato em breve.`);
-                careerModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
+            </div>
+        `;
+
+        careerModalTitle.textContent = 'Rotação de Funções';
+        careerModalBody.innerHTML = formHtml;
+        careerModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+
+        document.getElementById('rotation-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert(`Seu interesse na rotação ${rotationTitle} foi registrado com sucesso! O RH entrará em contato em breve.`);
+            careerModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         });
     });
+});
+
     
     // Fechar modais
     document.querySelectorAll('.close-modal, .modal-close-button').forEach(closeBtn => {
